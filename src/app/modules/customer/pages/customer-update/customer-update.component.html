@@ -1,0 +1,82 @@
+<div class="max-w-xl mx-auto p-6 bg-white rounded-lg shadow-md mt-8">
+  <h2 class="text-2xl font-semibold mb-6 text-center text-indigo-700">Actualizar Cliente</h2>
+
+  <!-- Full Name Input -->
+  <div class="mb-4">
+    <label for="fullName" class="block text-sm font-medium text-gray-700">Nombre Completo</label>
+    <input
+      type="text"
+      id="fullName"
+      [(ngModel)]="fullName"
+      class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+      placeholder="Ingrese el nombre completo"
+    />
+  </div>
+
+  <!-- Email Input -->
+  <div class="mb-4">
+    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+    <input
+      type="email"
+      id="email"
+      [(ngModel)]="email"
+      class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+      placeholder="Ingrese el email"
+    />
+  </div>
+
+  <!-- Phone Input -->
+  <div class="mb-4">
+    <label for="phone" class="block text-sm font-medium text-gray-700">Teléfono</label>
+    <input
+      type="text"
+      id="phone"
+      [(ngModel)]="phone"
+      class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+      placeholder="Ingrese el teléfono"
+    />
+  </div>
+
+  <!-- Address Input -->
+  <div class="mb-4">
+    <label for="address" class="block text-sm font-medium text-gray-700">Dirección</label>
+    <input
+      type="text"
+      id="address"
+      [(ngModel)]="address"
+      class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+      placeholder="Ingrese la dirección"
+    />
+  </div>
+
+  <!-- Credit Limit Input -->
+  <div class="mb-4">
+    <label for="creditLimit" class="block text-sm font-medium text-gray-700">Límite de Crédito</label>
+    <input
+      type="number"
+      id="creditLimit"
+      [(ngModel)]="creditLimit"
+      class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+      placeholder="Ingrese el límite de crédito"
+    />
+  </div>
+
+  <!-- Buttons -->
+  <div class="flex justify-between mt-6">
+    <!-- Back Button -->
+    <button
+      (click)="router.navigate(['/customers'])"
+      class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+    >
+      Volver
+    </button>
+
+    <!-- Update Button -->
+    <button
+      (click)="updateCustomer()"
+      class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+    >
+      Actualizar Cliente
+    </button>
+  </div>
+</div>

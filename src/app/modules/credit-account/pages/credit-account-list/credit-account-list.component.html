@@ -1,0 +1,61 @@
+<div class="container mx-auto mt-10 px-4">
+  <h2 class="text-2xl font-semibold text-gray-800 mb-6">Listado de Cuentas de Crédito</h2>
+
+  <div class="flex justify-between items-center mb-4">
+    <div>
+      <label for="itemsPerPage" class="text-sm text-gray-600">Items por página:</label>
+      <select id="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="updateItemsPerPage($event)" class="ml-2 p-1 border rounded">
+        <option [value]="5">5</option>
+        <option [value]="10">10</option>
+        <option [value]="15">15</option>
+        <option [value]="20">20</option>
+      </select>
+    </div>
+    <div class="flex space-x-4">
+      <button (click)="toggleFilters()" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Filtros</button>
+      <button (click)="createCreditAccount()" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">Nueva Cuenta</button>
+    </div>
+  </div>
+
+  <div *ngIf="showFilters" class="mb-4 p-4 border rounded bg-gray-50">
+    <div class="grid grid-cols-3 gap-4">
+      <input [(ngModel)]="idCustomerFilter" placeholder="Filtrar por ID de Cliente" class="p-2 border rounded" />
+      <input [(ngModel)]="minBalanceFilter" placeholder="Saldo Mínimo" type="number" class="p-2 border rounded" />
+      <input [(ngModel)]="maxBalanceFilter" placeholder="Saldo Máximo" type="number" class="p-2 border rounded" />
+    </div>
+    <div class="mt-4 flex justify-between">
+      <button (click)="applyFilters()" class="bg-blue-400 hover:bg-blue-500 text-white py-2 px-4 rounded">Aplicar Filtros</button>
+      <button (click)="resetFilters()" class="bg-red-400 hover:bg-red-500 text-white py-2 px-4 rounded">Reset</button>
+    </div>
+  </div>
+
+  <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+    <thead class="bg-gray-200">
+      <tr>
+        <th class="p-3 text-left text-sm font-semibold text-gray-700">ID</th>
+        <th class="p-3 text-left text-sm font-semibold text-gray-700">Saldo</th>
+        <th class="p-3 text-left text-sm font-semibold text-gray-700">Fecha de Vencimiento</th>
+        <th class="p-3 text-left text-sm font-semibold text-gray-700">ID Cliente</th>
+        <th class="p-3 text-center text-sm font-semibold text-gray-700">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let account of creditAccounts">
+        <td class="p-3 text-sm text-gray-600">{{ account.id }}</td>
+        <td class="p-3 text-sm text-gray-600">{{ account.credit_balance | currency }}</td>
+        <td class="p-3 text-sm text-gray-600">{{ account.due_date | date: 'yyyy-MM-dd' }}</td>
+        <td class="p-3 text-sm text-gray-600">{{ account.id_customer }}</td>
+        <td class="p-3 text-center">
+          <button (click)="editCreditAccount(account.id)" class="bg-blue-400 hover:bg-blue-500 text-white text-sm font-medium py-1 px-3 rounded transition duration-150">Editar</button>
+          <button (click)="deleteCreditAccount(account.id)" class="bg-red-400 hover:bg-red-500 text-white text-sm font-medium py-1 px-3 rounded ml-2 transition duration-150">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="flex justify-between items-center mt-6">
+    <button (click)="prevPage()" [disabled]="currentPage === 1" class="bg-gray-200 hover:bg-gray-300 text-gray-600 text-sm font-medium py-1 px-3 rounded transition duration-150">Página anterior</button>
+    <span class="text-sm text-gray-600">Página {{ currentPage }}</span>
+    <button (click)="nextPage()" [disabled]="creditAccounts.length < itemsPerPage" class="bg-gray-200 hover:bg-gray-300 text-gray-600 text-sm font-medium py-1 px-3 rounded transition duration-150">Siguiente página</button>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="container mx-auto mt-10 px-4">
+  <h2 class="text-2xl font-semibold text-gray-800 mb-6">Listado de Productos</h2>
+
+  <div class="flex justify-between items-center mb-4">
+    <div>
+      <label for="itemsPerPage" class="text-sm text-gray-600">Items por página:</label>
+      <select id="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="updateItemsPerPage($event)" class="ml-2 p-1 border rounded">
+        <option [value]="5">5</option>
+        <option [value]="10">10</option>
+        <option [value]="15">15</option>
+        <option [value]="20">20</option>
+      </select>
+    </div>
+    <div class="flex space-x-4">
+      <button (click)="toggleFilters()" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Filtros</button>
+      <button (click)="createProduct()" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">Nuevo Producto</button>
+    </div>
+  </div>
+
+  <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+    <thead class="bg-gray-200">
+      <tr>
+        <th class="p-3 text-left text-sm font-semibold text-gray-700">ID</th>
+        <th class="p-3 text-left text-sm font-semibold text-gray-700">Nombre</th>
+        <th class="p-3 text-left text-sm font-semibold text-gray-700">Descripción</th>
+        <th class="p-3 text-left text-sm font-semibold text-gray-700">Precio</th>
+        <th class="p-3 text-left text-sm font-semibold text-gray-700">Stock</th>
+        <th class="p-3 text-center text-sm font-semibold text-gray-700">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td class="p-3 text-sm text-gray-600">{{ product.id }}</td>
+        <td class="p-3 text-sm text-gray-600">{{ product.name }}</td>
+        <td class="p-3 text-sm text-gray-600">{{ product.description || '-' }}</td>
+        <td class="p-3 text-sm text-gray-600">{{ product.price | currency }}</td>
+        <td class="p-3 text-sm text-gray-600">{{ product.stock }}</td>
+        <td class="p-3 text-center">
+          <button (click)="editProduct(product.id)" class="bg-blue-400 hover:bg-blue-500 text-white text-sm font-medium py-1 px-3 rounded transition duration-150">Editar</button>
+          <button (click)="deleteProduct(product.id)" class="bg-red-400 hover:bg-red-500 text-white text-sm font-medium py-1 px-3 rounded ml-2 transition duration-150">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="flex justify-between items-center mt-6">
+    <button (click)="prevPage()" [disabled]="currentPage === 1" class="bg-gray-200 hover:bg-gray-300 text-gray-600 text-sm font-medium py-1 px-3 rounded transition duration-150">Página anterior</button>
+    <span class="text-sm text-gray-600">Página {{ currentPage }}</span>
+    <button (click)="nextPage()" [disabled]="products.length < itemsPerPage" class="bg-gray-200 hover:bg-gray-300 text-gray-600 text-sm font-medium py-1 px-3 rounded transition duration-150">Siguiente página</button>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="max-w-xl mx-auto p-6 bg-white rounded-lg shadow-md mt-8">
+  <h2 class="text-2xl font-semibold mb-6 text-center">Crear Cuenta de Crédito</h2>
+
+  <!-- Customer Selection -->
+  <div class="mb-4">
+    <label for="customer" class="block text-sm font-medium text-gray-700">Cliente</label>
+    <select
+      id="customer"
+      [(ngModel)]="selectedCustomerId"
+      class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+    >
+      <option [ngValue]="null" disabled selected>Seleccione un cliente</option>
+      <option *ngFor="let customer of customers" [ngValue]="customer.id">{{ customer.full_name }}</option>
+    </select>
+  </div>
+
+  <!-- Credit Balance Input -->
+  <div class="mb-4">
+    <label for="creditBalance" class="block text-sm font-medium text-gray-700">Balance de Crédito</label>
+    <input
+      type="number"
+      id="creditBalance"
+      [(ngModel)]="creditBalance"
+      class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+      placeholder="Ingrese el balance de crédito"
+    />
+  </div>
+
+  <!-- Due Date Input -->
+  <div class="mb-4">
+    <label for="dueDate" class="block text-sm font-medium text-gray-700">Fecha de Vencimiento</label>
+    <input
+      type="date"
+      id="dueDate"
+      [(ngModel)]="dueDate"
+      class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+      placeholder="Seleccione la fecha de vencimiento"
+    />
+  </div>
+
+  <!-- Create Credit Account Button -->
+  <div class="flex justify-center">
+    <button
+      (click)="createCreditAccount()"
+      class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+    >
+      Crear Cuenta de Crédito
+    </button>
+  </div>
+</div>

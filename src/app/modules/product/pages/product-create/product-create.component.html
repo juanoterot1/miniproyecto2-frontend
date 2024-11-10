@@ -1,0 +1,63 @@
+<div class="max-w-xl mx-auto p-6 bg-white rounded-lg shadow-md mt-8">
+  <h2 class="text-2xl font-semibold mb-6 text-center text-indigo-700">Crear Producto</h2>
+
+  <div class="mb-4">
+    <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
+    <input
+      type="text"
+      id="name"
+      [(ngModel)]="product.name"
+      class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+      placeholder="Ingrese el nombre del producto"
+    />
+  </div>
+
+  <div class="mb-4">
+    <label for="description" class="block text-sm font-medium text-gray-700">Descripción</label>
+    <input
+      type="text"
+      id="description"
+      [(ngModel)]="product.description"
+      class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+      placeholder="Ingrese una descripción"
+    />
+  </div>
+
+  <div class="mb-4">
+    <label for="price" class="block text-sm font-medium text-gray-700">Precio</label>
+    <input
+      type="number"
+      id="price"
+      [(ngModel)]="product.price"
+      class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+      placeholder="Ingrese el precio del producto"
+    />
+  </div>
+
+  <div class="mb-4">
+    <label for="stock" class="block text-sm font-medium text-gray-700">Inventario</label>
+    <input
+      type="number"
+      id="stock"
+      [(ngModel)]="product.stock"
+      class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+      placeholder="Ingrese la cantidad en inventario"
+    />
+  </div>
+
+  <div class="flex justify-between mt-6">
+    <button
+      (click)="router.navigate(['/products'])"
+      class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+    >
+      Volver
+    </button>
+
+    <button
+      (click)="createProduct()"
+      class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+    >
+      Crear Producto
+    </button>
+  </div>
+</div>
