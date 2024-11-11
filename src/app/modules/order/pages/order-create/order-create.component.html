@@ -1,0 +1,103 @@
+<div class="max-w-2xl mx-auto p-8 bg-white rounded-xl shadow-lg mt-10">
+  <h2 class="text-3xl font-semibold mb-8 text-center text-indigo-800">Crear Orden</h2>
+
+  <!-- Payment Method Selection -->
+  <div class="mb-6">
+    <label for="paymentMethod" class="block text-sm font-semibold text-gray-600">Método de Pago</label>
+    <select
+      id="paymentMethod"
+      [(ngModel)]="paymentMethod"
+      class="mt-2 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-600 focus:border-indigo-600 transition-colors"
+    >
+      <option [value]="''" disabled selected>Seleccione el método de pago</option>
+      <option *ngFor="let method of paymentMethods" [value]="method">{{ method }}</option>
+    </select>
+  </div>
+
+  <!-- Customer ID Input -->
+  <div class="mb-6">
+    <label for="idCustomer" class="block text-sm font-semibold text-gray-600">ID del Cliente</label>
+    <input
+      type="number"
+      id="idCustomer"
+      [(ngModel)]="idCustomer"
+      class="mt-2 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-600 focus:border-indigo-600 transition-colors"
+      placeholder="Ingrese el ID del cliente"
+    />
+  </div>
+
+  <!-- Delivery Date Input -->
+  <div class="mb-6">
+    <label for="deliveryDate" class="block text-sm font-semibold text-gray-600">Fecha de Entrega</label>
+    <input
+      type="date"
+      id="deliveryDate"
+      [(ngModel)]="deliveryDate"
+      class="mt-2 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-600 focus:border-indigo-600 transition-colors"
+    />
+  </div>
+
+  <!-- Status Input -->
+  <div class="mb-6">
+    <label for="status" class="block text-sm font-semibold text-gray-600">Estado</label>
+    <input
+      type="text"
+      id="status"
+      [(ngModel)]="status"
+      class="mt-2 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-600 focus:border-indigo-600 transition-colors"
+      placeholder="Ingrese el estado"
+    />
+  </div>
+
+  <!-- Add New Item Section -->
+  <div class="mb-6">
+    <h3 class="text-lg font-medium text-gray-700 mb-2">Agregar Item a la Orden</h3>
+    <input
+      type="number"
+      [(ngModel)]="newOrderItem.quantity"
+      class="mr-2 p-2 border border-gray-300 rounded-lg shadow-sm"
+      placeholder="Cantidad"
+      min="1"
+    />
+    <select
+      (change)="onProductSelect($event)"
+      class="mr-2 p-2 border border-gray-300 rounded-lg shadow-sm"
+    >
+      <option [value]="0" disabled selected>Seleccione un producto</option>
+      <option *ngFor="let product of products" [value]="product.id">
+        {{ product.name }}
+      </option>
+    </select>
+    <button (click)="addOrderItem()" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow-sm">Agregar Item</button>
+  </div>
+
+  <!-- Selected Products List -->
+  <div class="mb-6">
+    <h3 class="text-lg font-medium text-gray-700 mb-2">Productos Seleccionados</h3>
+    <ul>
+      <li *ngFor="let selected of selectedProducts" class="flex justify-between py-2 border-b">
+        <span>{{ selected.product.name }} (x{{ selected.quantity }})</span>
+        <span>{{ selected.totalPrice | currency }}</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="flex justify-between mt-8">
+    <!-- Back Button -->
+    <button
+      (click)="router.navigate(['/orders'])"
+      class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-lg focus:outline-none"
+    >
+      Volver
+    </button>
+
+    <!-- Create Button -->
+    <button
+      (click)="createOrder()"
+      class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-lg focus:outline-none"
+    >
+      Crear Orden
+    </button>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="container mx-auto mt-10 px-4">
+  <h2 class="text-2xl font-semibold text-gray-800 mb-6">Listado de Órdenes</h2>
+
+  <div class="flex justify-between items-center mb-4">
+    <div>
+      <label for="itemsPerPage" class="text-sm text-gray-600">Items por página:</label>
+      <select id="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="updateItemsPerPage($event)" class="ml-2 p-1 border rounded">
+        <option [value]="5">5</option>
+        <option [value]="10">10</option>
+        <option [value]="15">15</option>
+        <option [value]="20">20</option>
+      </select>
+    </div>
+    <div class="flex space-x-4">
+      <button (click)="toggleFilters()" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Filtros</button>
+      <button (click)="createOrder()" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">Nueva Orden</button>
+    </div>
+  </div>
+
+  <div *ngIf="showFilters" class="mb-4 p-4 border rounded bg-gray-50">
+    <div class="grid grid-cols-3 gap-4">
+      <input [(ngModel)]="statusFilter" placeholder="Filtrar por Estado" class="p-2 border rounded" />
+      <input [(ngModel)]="customerFilter" placeholder="Filtrar por ID de Cliente" type="number" class="p-2 border rounded" />
+    </div>
+    <div class="mt-4 flex justify-between">
+      <button (click)="applyFilters()" class="bg-blue-400 hover:bg-blue-500 text-white py-2 px-4 rounded">Aplicar Filtros</button>
+      <button (click)="resetFilters()" class="bg-red-400 hover:bg-red-500 text-white py-2 px-4 rounded">Reset</button>
+    </div>
+  </div>
+
+  <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+    <thead class="bg-gray-200">
+      <tr>
+        <th class="p-3 text-left text-sm font-semibold text-gray-700">ID</th>
+        <th class="p-3 text-left text-sm font-semibold text-gray-700">Fecha de Orden</th>
+        <th class="p-3 text-left text-sm font-semibold text-gray-700">Fecha de Entrega</th>
+        <th class="p-3 text-left text-sm font-semibold text-gray-700">Estado</th>
+        <th class="p-3 text-left text-sm font-semibold text-gray-700">Método de Pago</th>
+        <th class="p-3 text-center text-sm font-semibold text-gray-700">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td class="p-3 text-sm text-gray-600">{{ order.id }}</td>
+        <td class="p-3 text-sm text-gray-600">{{ order.order_date }}</td>
+        <td class="p-3 text-sm text-gray-600">{{ order.delivery_date || 'N/A' }}</td>
+        <td class="p-3 text-sm text-gray-600">{{ order.status }}</td>
+        <td class="p-3 text-sm text-gray-600">{{ order.payment_method }}</td>
+        <td class="p-3 text-center">
+          <button (click)="editOrder(order.id)" class="bg-yellow-400 hover:bg-yellow-500 text-white text-sm font-medium py-1 px-3 rounded transition duration-150">Editar</button>
+          <button (click)="deleteOrder(order.id)" class="bg-red-400 hover:bg-red-500 text-white text-sm font-medium py-1 px-3 rounded ml-2 transition duration-150">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="flex justify-between items-center mt-6">
+    <button (click)="prevPage()" [disabled]="currentPage === 1" class="bg-gray-200 hover:bg-gray-300 text-gray-600 text-sm font-medium py-1 px-3 rounded transition duration-150">Página anterior</button>
+    <span class="text-sm text-gray-600">Página {{ currentPage }}</span>
+    <button (click)="nextPage()" [disabled]="orders.length < itemsPerPage" class="bg-gray-200 hover:bg-gray-300 text-gray-600 text-sm font-medium py-1 px-3 rounded transition duration-150">Siguiente página</button>
+  </div>
+</div>

@@ -26,14 +26,14 @@ export class InventoryCreateComponent implements OnInit {
   loadProducts(): void {
     this.productService.getProducts().subscribe(
       (response) => {
-        this.products = response.result.data;
+        this.products = response.result.data; // Ajuste aquí basado en la estructura de ApiResponse
+        console.log('Productos cargados:', this.products);
       },
       (error) => {
-        console.error('Error loading products:', error);
+        console.error('Error fetching products:', error);
       }
     );
   }
-
   createInventory(): void {
     this.inventoryService.createInventoryItem(this.inventory).subscribe(
       () => {

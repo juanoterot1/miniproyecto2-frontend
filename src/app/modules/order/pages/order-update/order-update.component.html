@@ -1,0 +1,74 @@
+<div class="max-w-xl mx-auto p-6 bg-white rounded-lg shadow-md mt-8">
+  <h2 class="text-2xl font-semibold mb-6 text-center text-indigo-700">Actualizar Orden</h2>
+
+  <div class="mb-4">
+    <label for="orderDate" class="block text-sm font-medium text-gray-700">Fecha de Orden</label>
+    <input
+      type="date"
+      id="orderDate"
+      [(ngModel)]="order.order_date"
+      class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+    />
+  </div>
+
+  <div class="mb-4">
+    <label for="deliveryDate" class="block text-sm font-medium text-gray-700">Fecha de Entrega</label>
+    <input
+      type="date"
+      id="deliveryDate"
+      [(ngModel)]="order.delivery_date"
+      class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+    />
+  </div>
+
+  <div class="mb-4">
+    <label for="status" class="block text-sm font-medium text-gray-700">Estado</label>
+    <input
+      type="text"
+      id="status"
+      [(ngModel)]="order.status"
+      class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+      placeholder="Ingrese el estado de la orden"
+    />
+  </div>
+
+  <div class="mb-4">
+    <label for="paymentMethod" class="block text-sm font-medium text-gray-700">Método de Pago</label>
+    <input
+      type="text"
+      id="paymentMethod"
+      [(ngModel)]="order.payment_method"
+      class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+      placeholder="Ingrese el método de pago"
+    />
+  </div>
+
+  <div class="mb-4">
+    <label for="customer" class="block text-sm font-medium text-gray-700">Cliente</label>
+    <select
+      id="customer"
+      [(ngModel)]="order.id_customer"
+      class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+    >
+      <option *ngFor="let customer of customers" [value]="customer.id">
+        {{ customer.full_name }}
+      </option>
+    </select>
+  </div>
+
+  <div class="flex justify-between mt-6">
+    <button
+      (click)="router.navigate(['/orders'])"
+      class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+    >
+      Volver
+    </button>
+
+    <button
+      (click)="updateOrder()"
+      class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+    >
+      Actualizar Orden
+    </button>
+  </div>
+</div>
