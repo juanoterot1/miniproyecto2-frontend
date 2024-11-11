@@ -14,16 +14,19 @@
     </select>
   </div>
 
-  <!-- Customer ID Input -->
+  <!-- Customer Selection -->
   <div class="mb-6">
-    <label for="idCustomer" class="block text-sm font-semibold text-gray-600">ID del Cliente</label>
-    <input
-      type="number"
+    <label for="idCustomer" class="block text-sm font-semibold text-gray-600">Cliente</label>
+    <select
       id="idCustomer"
       [(ngModel)]="idCustomer"
       class="mt-2 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-600 focus:border-indigo-600 transition-colors"
-      placeholder="Ingrese el ID del cliente"
-    />
+    >
+      <option [value]="0" disabled selected>Seleccione un cliente</option>
+      <option *ngFor="let customer of customers" [value]="customer.id">
+        {{ customer.full_name }}
+      </option>
+    </select>
   </div>
 
   <!-- Delivery Date Input -->

@@ -4,6 +4,7 @@ import { Order } from '../../../../core/models/order.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-order-list',
@@ -100,5 +101,31 @@ export class OrderListComponent implements OnInit {
 
   editOrder(id: number): void {
     this.router.navigate(['/orders/update', id]);
+  }
+
+  markAsCompleted(order: Order): void {
+    // Verifica si el estado ya está completado
+    if (order.status === 'Completada') {
+      Swal.fire('La orden ya está completada.');
+      return;
+    }
+
+    // Cambia el estado de la orden a 'Completada'
+    const updatedOrder = { ...order, status: 'Completada' };
+    this.orderService.updateOrder(order.id, updatedOrder).subscribe(
+      () => {
+        order.status = 'Completada';
+        Swal.fire({
+          icon: 'success',
+          title: 'Venta Realizada',
+          text: 'La orden ha sido marcada como completada.',
+          confirmButtonColor: '#3085d6',
+        });
+      },
+      (error) => {
+        console.error('Error updating order:', error);
+        Swal.fire('Error', 'Hubo un error al actualizar el estado de la orden.', 'error');
+      }
+    );
   }
 }

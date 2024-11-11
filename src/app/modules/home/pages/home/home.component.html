@@ -1,42 +1,63 @@
 <div class="flex flex-col p-16 h-full">
-  <!-- Header Section -->
   <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
     <h1 class="text-4xl text-gray-700 font-bold mb-4 md:mb-0">
       Bienvenido a MiniProyecto - 2
     </h1>
     <button class="bg-gradient-to-r from-black via-black to-[#014694] text-white py-2 px-8 rounded-full hover:from-[#014694] hover:via-black hover:to-black transition duration-300 md:ml-auto">
-      <a [routerLink]="['/appointments']">Ver Ordenes</a>
+      <a [routerLink]="['/orders']">Ver órdenes</a>
     </button>
   </div>
 
-  <!-- Divider Line -->
   <hr class="border-t-2 border-gray-400 mb-8">
 
-  <!-- Indicadores Section -->
   <div class="bg-gray-100 p-6 rounded-lg">
     <h2 class="text-lg bg-gradient-to-r from-black via-black to-[#014694] text-white py-2 px-4 rounded-full inline-block mb-4">
       Indicadores generales
     </h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <!-- Indicador de Total Ordenes -->
       <div class="bg-white shadow-lg rounded-lg p-6">
-        <h3 class="text-xl font-extrabold text-gray-600">Total Ordenes</h3>
-        <div class="text-6xl text-blue-600 mt-4">{{ todayAppointments }}</div>
+        <h3 class="text-xl font-extrabold text-gray-600">Total Órdenes</h3>
+        <div class="text-6xl text-blue-600 mt-4">{{ totalOrders }}</div>
         <p class="text-gray-500">Total</p>
       </div>
 
-      <!-- Indicador de Ordenes Completadas -->
       <div class="bg-white shadow-lg rounded-lg p-6">
-        <h3 class="text-xl font-extrabold text-gray-600">Ordenes completadas</h3>
-        <div class="text-6xl text-red-600 mt-4">{{ todayActiveAppointments }}</div>
+        <h3 class="text-xl font-extrabold text-gray-600">Órdenes Completadas</h3>
+        <div class="text-6xl text-green-600 mt-4">{{ totalCompletedOrders }}</div>
         <p class="text-gray-500">Total</p>
       </div>
 
-      <!-- Indicador de Ordenes -->
       <div class="bg-white shadow-lg rounded-lg p-6">
-        <h3 class="text-xl font-extrabold text-gray-600">Ordenes sin completar</h3>
-        <div class="text-6xl text-orange-500 mt-4">{{ totalAppointments }}</div>
+        <h3 class="text-xl font-extrabold text-gray-600">Órdenes Pendientes</h3>
+        <div class="text-6xl text-red-600 mt-4">{{ totalPendingOrders }}</div>
         <p class="text-gray-500">Total</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-gray-100 p-6 rounded-lg mt-8">
+    <h2 class="text-lg bg-gradient-to-r from-black via-black to-[#014694] text-white py-2 px-4 rounded-full inline-block mb-4">
+      Principales métricas
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="bg-white shadow-lg rounded-lg p-6">
+        <h3 class="text-xl font-extrabold text-gray-600">Top 3 Clientes con Más Ventas</h3>
+        <ul class="mt-4 space-y-2">
+          <li *ngFor="let customer of topCustomers" class="flex justify-between text-lg">
+            <span>{{ customer.customer_name }}</span>
+            <span class="text-blue-600 font-bold">{{ customer.completed_order_count }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="bg-white shadow-lg rounded-lg p-6">
+        <h3 class="text-xl font-extrabold text-gray-600">Top 3 Productos Más Vendidos</h3>
+        <ul class="mt-4 space-y-2">
+          <li *ngFor="let product of topSellingProducts" class="flex justify-between text-lg">
+            <span>{{ product.product_name }}</span>
+            <span class="text-green-600 font-bold">{{ product.total_quantity_sold }}</span>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
